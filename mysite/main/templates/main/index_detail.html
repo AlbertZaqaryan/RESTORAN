@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Detail page{% endblock %}
+
+{% block content %}
+<div>
+    {% for i in category_type_list %}
+        <p><a href="#">{{ i.name }}</a></p>
+        {% for j in i.category_type.all %}
+            <p><a href="#">{{ j.name }}</a>
+            <form action="{% url 'delete' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" name="id" value="{{ j.id }}">Delete</button>
+            </form></p>
+        {% endfor %}
+    {% endfor %}
+</div>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="category" value="{{ cat_item.id }}" id="" placeholder="Enter category name">
+        <input type="text" name="name" id="" placeholder="Enter category name">
+        <button type="submit">+</button>
+    </form>
+</div>
+{% endblock %}

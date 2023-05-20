@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div>
+    {% for i in category_list %}
+        <p><a href="{% url 'index_detail' i.id %}">{{ i.name }}</a></p>
+    {% endfor %}
+</div>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" id="" placeholder="Enter category name">
+        <button type="submit">+</button>
+    </form>
+</div>
+{% endblock %}
